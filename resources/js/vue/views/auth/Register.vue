@@ -121,7 +121,7 @@ export default {
     methods: {
         async registerUser() {
             this.errors = {};
-            
+
             this.$store.dispatch(
                 'register',
                 {
@@ -142,6 +142,7 @@ export default {
                     this.$router.push({ name: 'home' });
                 })
                 .catch(err => {
+                    console.log(err);
                     if (typeof err === 'string') {
                         this.$store.dispatch(
                             'addFlashMessage',

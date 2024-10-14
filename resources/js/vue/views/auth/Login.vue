@@ -76,7 +76,7 @@ export default {
     methods: {
         login() {
             this.errors = {};
-            
+
             this.$store.dispatch(
                 'login',
                 {
@@ -97,6 +97,7 @@ export default {
                     this.$router.push({ name: 'home' });
                 })
                 .catch(err => {
+                    console.log(err);
                     if (typeof err === 'string') {
                         this.$store.dispatch(
                             'addFlashMessage',

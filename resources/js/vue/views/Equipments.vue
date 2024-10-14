@@ -154,6 +154,7 @@ export default {
                     }
                 ).catch(
                     (error) => {
+                        console.log(error);
                         if (typeof error === 'string') {
                             this.$store.dispatch(
                                 'addFlashMessage',
@@ -170,6 +171,7 @@ export default {
                     }
                 );
             } catch (error) {
+                console.log(error);
                 if (typeof error === 'string') {
                     this.$store.dispatch(
                         'addFlashMessage',
@@ -198,12 +200,15 @@ export default {
                     data,
                 ).then(
                     (response) => {
-                        this.equipments = response.data.data;
-                        this.meta = response.data.meta;
-                        this.links = response.data.links;
+                        if ('data' in response.data) {
+                            this.equipments = response.data.data;
+                            this.meta = response.data.meta;
+                            this.links = response.data.links;
+                        }
                     }
                 ).catch(
                     (error) => {
+                        console.log(error);
                         if (typeof error === 'string') {
                             this.$store.dispatch(
                                 'addFlashMessage',
@@ -220,6 +225,7 @@ export default {
                     }
                 );
             } catch (error) {
+                console.log(error);
                 if (typeof error === 'string') {
                     this.$store.dispatch(
                         'addFlashMessage',
@@ -247,6 +253,7 @@ export default {
                     }
                 ).catch(
                     (error) => {
+                        console.log(error);
                         if (typeof error === 'string') {
                             this.$store.dispatch(
                                 'addFlashMessage',
@@ -263,6 +270,7 @@ export default {
                     }
                 );
             } catch (error) {
+                console.log(error);
                 if (typeof error === 'string') {
                     this.$store.dispatch(
                         'addFlashMessage',

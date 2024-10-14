@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import { useRoute } from 'vue-router'
 import apiClient from '../api';
 
 const store = createStore({
@@ -42,7 +43,10 @@ const store = createStore({
             ).then(({ data }) => {
                 commit('setUserData', data)
             }).catch(err => {
-                throw err.response.data;
+                if ('response' in err && 'data' in err.response) {
+                    throw err.response.data;
+                }
+                throw err;
             })
         },
 
@@ -52,7 +56,10 @@ const store = createStore({
             ).then(({ data }) => {
                 commit('setUserData', data)
             }).catch(err => {
-                throw err.response.data;
+                if ('response' in err && 'data' in err.response) {
+                    throw err.response.data;
+                }
+                throw err;
             })
         },
 
@@ -80,11 +87,10 @@ apiClient.interceptors.response.use(
     (response) => response,
     (error) => {
         if (error.response && error.response.status === 401) {
-            if (this.$route.name !== 'login' && this.$route.name !== 'register') {
-                store.dispatch('logout');
-
+            if (store.getters.getUserData) {
                 store.dispatch('addFlashMessage', 'Ваша сессия истекла, пожалуйста, войдите снова.');
             }
+            store.dispatch('logout');
         }
         return Promise.reject(error);
     }

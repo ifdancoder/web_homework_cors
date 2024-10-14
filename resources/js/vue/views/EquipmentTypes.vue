@@ -151,10 +151,37 @@ export default {
                 ).catch(
                     (error) => {
                         console.log("Ошибка была обработана: ", error);
+                        error = error.response?.data;
+                        if (typeof error === 'string') {
+                            this.$store.dispatch(
+                                'addFlashMessage',
+                                error
+                            );
+                        } else if ('message' in error) {
+                            this.$store.dispatch(
+                                'addFlashMessage',
+                                error.message
+                            );
+                        } else {
+                            this.errors = error;
+                        }
                     }
                 );
             } catch (error) {
                 console.error("Ошибка при получении оборудования по ссылке:", error);
+                if (typeof error === 'string') {
+                    this.$store.dispatch(
+                        'addFlashMessage',
+                        error
+                    );
+                } else if ('message' in error) {
+                    this.$store.dispatch(
+                        'addFlashMessage',
+                        error.message
+                    );
+                } else {
+                    this.errors = error;
+                }
             }
         },
         async fetchEquipmentTypes() {
@@ -177,10 +204,37 @@ export default {
                 ).catch(
                     (error) => {
                         console.log("Ошибка была обработана: ", error);
+                        error = error.response?.data;
+                        if (typeof error === 'string') {
+                            this.$store.dispatch(
+                                'addFlashMessage',
+                                error
+                            );
+                        } else if ('message' in error) {
+                            this.$store.dispatch(
+                                'addFlashMessage',
+                                error.message
+                            );
+                        } else {
+                            this.errors = error;
+                        }
                     }
                 );
             } catch (error) {
                 console.error("Ошибка при получении типов оборудования:", error);
+                if (typeof error === 'string') {
+                    this.$store.dispatch(
+                        'addFlashMessage',
+                        error
+                    );
+                } else if ('message' in error) {
+                    this.$store.dispatch(
+                        'addFlashMessage',
+                        error.message
+                    );
+                } else {
+                    this.errors = error;
+                }
             }
         },
         async deleteEquipmentType(id) {
@@ -196,10 +250,37 @@ export default {
                 ).catch(
                     (error) => {
                         console.log("Ошибка была обработана: ", error);
+                        error = error.response?.data;
+                        if (typeof error === 'string') {
+                            this.$store.dispatch(
+                                'addFlashMessage',
+                                error
+                            );
+                        } else if ('message' in error) {
+                            this.$store.dispatch(
+                                'addFlashMessage',
+                                error.message
+                            );
+                        } else {
+                            this.errors = error;
+                        }
                     }
                 );
             } catch (error) {
                 console.error("Ошибка при получении типов оборудования:", error);
+                if (typeof error === 'string') {
+                    this.$store.dispatch(
+                        'addFlashMessage',
+                        error
+                    );
+                } else if ('message' in error) {
+                    this.$store.dispatch(
+                        'addFlashMessage',
+                        error.message
+                    );
+                } else {
+                    this.errors = error;
+                }
             }
         },
     },

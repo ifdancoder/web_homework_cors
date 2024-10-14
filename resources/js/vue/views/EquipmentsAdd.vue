@@ -269,6 +269,7 @@ export default {
                     }
                 ).catch(
                     (error) => {
+                        console.log(error);
                         if (typeof error === 'string') {
                             this.$store.dispatch(
                                 'addFlashMessage',
@@ -285,6 +286,7 @@ export default {
                     }
                 );
             } catch (error) {
+                console.log(error);
                 if (typeof error === 'string') {
                     this.$store.dispatch(
                         'addFlashMessage',
@@ -314,6 +316,7 @@ export default {
                     }
                 ).catch(
                     (error) => {
+                        console.log(error);
                         error = error.response?.data;
                         if (typeof error === 'string') {
                             this.$store.dispatch(
@@ -341,6 +344,7 @@ export default {
                     }
                 );
             } catch (error) {
+                console.log(error);
                 if (typeof error === 'string') {
                     this.$store.dispatch(
                         'addFlashMessage',
@@ -382,6 +386,7 @@ export default {
                 }
             ).catch(
                 (error) => {
+                    console.log(error);
                     if (typeof error === 'string') {
                         this.$store.dispatch(
                             'addFlashMessage',
@@ -398,7 +403,20 @@ export default {
                 }
             );
         } catch (error) {
-            console.error("Ошибка при получении типов оборудования:", error);
+            console.log(error);
+            if (typeof error === 'string') {
+                this.$store.dispatch(
+                    'addFlashMessage',
+                    error
+                );
+            } else if ('errors' in error) {
+                this.errors = error.errors;
+            } else if ('message' in error) {
+                this.$store.dispatch(
+                    'addFlashMessage',
+                    error.message
+                );
+            }
         }
     }
 };
