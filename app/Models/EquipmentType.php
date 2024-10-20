@@ -12,7 +12,8 @@ class EquipmentType extends Model
 
     protected $fillable = [
         'equipment_type_name',
-        'serial_number_mask'
+        'serial_number_mask',
+        'user_id',
     ];
 
     public function toSearchableArray()

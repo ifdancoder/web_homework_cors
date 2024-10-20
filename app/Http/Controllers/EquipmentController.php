@@ -8,11 +8,14 @@ use Illuminate\Http\Request;
 use App\Http\Requests\EquipmentArrayRequest;
 use App\Http\Requests\EquipmentSearchRequest;
 use App\Http\Requests\EquipmentUpdateRequest;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use App\Services\EquipmentService;
 
-class EquipmentController
+class EquipmentController 
 {
+    use AuthorizesRequests;
+
     private $equipmentService;
 
     /**
@@ -53,6 +56,7 @@ class EquipmentController
      */
     public function store(EquipmentArrayRequest $request)
     {
+
         $validationResult = $request->result();
         $result = $this->equipmentService->create($validationResult);
 
@@ -85,6 +89,7 @@ class EquipmentController
      */
     public function update(EquipmentUpdateRequest $request, Equipment $equipment)
     {
+        $this->authorize('update', $equipment);
         $equipment = $this->equipmentService->update($equipment, $request->validated());
         
         return response()->json(new EquipmentResource($equipment), 200);

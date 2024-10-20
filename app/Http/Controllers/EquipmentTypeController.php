@@ -7,11 +7,14 @@ use App\Models\EquipmentType;
 use Illuminate\Http\Request;
 use App\Http\Requests\EquipmentTypeRequest;
 use App\Http\Requests\EquipmentTypeSearchRequest;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use App\Services\EquipmentTypeService;
 
 class EquipmentTypeController
 {
+    use AuthorizesRequests;
+    
     private $equipmentTypeService;
 
     /**

@@ -51,9 +51,12 @@ class EquipmentService
      */
     public function create(array $data)
     {
+        $user = auth()->user();
+
         $errors = $data['errors'];
         $success = $data['success'];
         foreach ($success as $key => $equipment) {
+            $equipment['user_id'] = $user->id;
             $created = Equipment::create($equipment);
             if ($created) {
                 unset($success->$key);

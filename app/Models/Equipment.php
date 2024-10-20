@@ -15,6 +15,7 @@ class Equipment extends Model
         'equipment_type_id',
         'serial_number',
         'description',
+        'user_id',
     ];
 
     protected $casts = [
