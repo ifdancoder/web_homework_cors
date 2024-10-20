@@ -1,5 +1,8 @@
 ## ТЗ выполнено с использованием Laravel, Vite, Vue, MariaDB (MySQL), Docker, Docker-Compose. Это мой первый проект с применением Vue
 
+## Схема базы данных и ER-диаграмма
+![Схема базы данных и ER-диаграмма](./readme/ER_DB_scheme.drawio.png?raw=true "Схема базы данных и ER-диаграмма")
+
 ## Используемые таблицы в бд
 - equipments (id, equipment_type_id, serial_number, description, created_at, updated_at)
 - equipment_types (id, equipment_type_name, serial_number_mask, created_at, updated_at)
