@@ -56,6 +56,8 @@ class EquipmentTypeService
      */
     public function create(array $data)
     {
+        $user = auth()->user();
+        $data['user_id'] = $user->id;
         $createdEquipmentType = EquipmentType::create($data);
 
         if (!$createdEquipmentType) {
@@ -74,6 +76,9 @@ class EquipmentTypeService
      */
     public function update($id, array $data)
     {
+        $user = auth()->user();
+        $data['user_id'] = $user->id;
+        
         $equipmentType = EquipmentType::find($id);
         if (!$equipmentType) {
             return null;

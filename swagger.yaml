@@ -1,0 +1,193 @@
+swagger: "2.0"
+info:
+  title: Equipment API
+  description: API для работы с оборудованием и его типами
+  version: 1.0.0
+
+paths:
+  /api/equipment:
+    get:
+      summary: Получение списка оборудования
+      parameters:
+        - in: query
+          name: q
+          description: Строка для поиска по всем полям
+          type: string
+        - in: query
+          name: serial_number
+          description: Строка для поиска по серийному номеру
+          type: string
+        - in: query
+          name: id
+          description: Строка для поиска по ID оборудования
+          type: integer
+        - in: query
+          name: description
+          description: Строка для поиска по примечанию к оборудованию
+          type: integer
+        - in: query
+          name: perPage
+          description: Количество элементов на странице
+          type: integer
+        - in: query
+          name: page
+          description: Номер страницы
+          type: integer
+      responses:
+        200:
+          description: Список оборудования
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Equipment'
+
+    post:
+      summary: Создание оборудования
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: equipments
+          description: Массив объектов оборудования
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Equipment'
+      responses:
+        201:
+          description: Оборудование создано
+
+  /api/equipment/{id}:
+    get:
+      summary: Получение оборудования по ID
+      parameters:
+        - in: path
+          name: id
+          description: ID оборудования
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Оборудование
+          schema:
+            $ref: '#/definitions/Equipment'
+
+    put:
+      summary: Обновление оборудования по ID
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          description: ID оборудования
+          type: integer
+          required: true
+        - in: body
+          name: equipment
+          description: обновленные параметры оборудования
+          schema:
+            $ref: '#/definitions/Equipment'
+      responses:
+        200:
+          content:
+            application/json:
+                schema:
+                  $ref: '#/definitions/Equipment'
+          description: Оборудование обновлено
+
+    delete:
+      summary: Удаление оборудования по ID
+      parameters:
+        - in: path
+          name: id
+          description: ID оборудования
+          type: integer
+          required: true
+      responses:
+        204:
+          description: Оборудование удалено
+
+  /api/equipment-type:
+    get:
+      summary: Получение списка оборудования
+      parameters:
+        - in: query
+          name: q
+          description: Строка для поиска по всем полям
+          type: string
+        - in: query
+          name: id
+          description: Строка для поиска по ID
+          type: string
+        - in: query
+          name: equipment_type_name
+          description: Строка для поиска по названию типа
+          type: string
+        - in: query
+          name: serial_number_mask
+          description: Строка для поиска по маске серийного номера типа
+          type: string
+        - in: query
+          name: perPage
+          description: Количество элементов на странице
+          type: string
+      responses:
+        200:
+          description: Список типов оборудования
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/EquipmentType'
+
+    post:
+      summary: Создание типа оборудования
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: equipment_type_name
+          description: Строка для поиска по названию типа
+          type: string
+        - in: body
+          name: serial_number_mask
+          description: Маска серийного номера типа
+          type: string
+      responses:
+        201:
+          description: Тип оборудования создан
+
+  /api/equipment-type/{id}:
+    delete:
+      summary: Удаление типа оборудования
+      parameters:
+        - in: path
+          name: id
+          description: ID типа оборудования
+          type: integer
+          required: true
+      responses:
+        204:
+          description: Тип оборудования удален
+
+definitions:
+  Equipment:
+    type: object
+    properties:
+      id:
+        type: integer
+      equipment_type_id:
+        type: integer
+      serial_number:
+        type: string
+      description:
+        type: string
+
+  EquipmentType:
+    type: object
+    properties:
+      id:
+        type: integer
+      equipment_type_name:
+        type: string
+      serial_number_mask:
+        type: string
